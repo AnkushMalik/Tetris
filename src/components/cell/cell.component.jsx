@@ -1,7 +1,8 @@
 import React from 'react'
 
-export const Cell = () => (
-    <div className="cell">
-        <div className="">hi</div>
-    </div>
+import { StylishCell } from './cell-styled.component'
+import { TETROMINOS } from '../../helpers/tetrominos'
+
+export const Cell = (props) => (
+    <StylishCell type={props.type} color={TETROMINOS[props.type].color}></StylishCell >
 )

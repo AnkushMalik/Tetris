@@ -1,14 +1,15 @@
 import React from 'react'
 
 import { Cell } from '../cell/cell.component'
-import './playground.styles.scss'
+import { PgDiv } from './pg-style.component'
 
 export const Playground = ({ pg }) => (
-    <div className='playground'>
+    <PgDiv height={pg.length} width={pg[0].length}>
         {
+
             pg.map(e =>
                 e.map((cell, idx) => <Cell key={idx} type={cell[0]} />)
             )
         }
-    </div>
+    </PgDiv>
 )

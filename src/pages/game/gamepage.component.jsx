@@ -7,7 +7,6 @@ import './gamepage.styles.scss'
 
 export const GamePage = () => (
     <div className="game-page">
-        Hello World!
         <InfoNav />
         <Playground pg={createpg()} />
     </div>
