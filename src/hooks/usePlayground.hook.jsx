@@ -24,10 +24,16 @@ export const usePlayground = (player, resetPlayer) => {
                     }
                 })
             });
+            // check collision
+            if (player.collided) {
+                resetPlayer();
+            }
+
+
             return newpg;
         }
         setPg(prev => updatepg(prev))
-    }, [player])
+    }, [player, resetPlayer])
 
     return [pg, setPg];
 }
