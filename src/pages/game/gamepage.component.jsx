@@ -7,25 +7,28 @@ import { usePlayground } from '../../hooks/usePlayground.hook'
 import { usePlayer } from '../../hooks/usePlayer.hook'
 
 import './gamepage.styles.scss'
+import { createpg } from '../../helpers/playgroundHelper';
 
 export const GamePage = () => {
 
     const [dropTime, setDropTime] = useState(null);
     const [gameOver, setGameOver] = useState(false);
 
-    const [player] = usePlayer();
-    const [pg, setPg] = usePlayground();
+    const [player, updatePlayerPos, resetPlayer] = usePlayer();
+    const [pg, setPg] = usePlayground(player, resetPlayer);
 
     const startGame = () => {
-
+        //Reset everything
+        setPg(createpg());
+        resetPlayer();
     }
 
-    const movePlayer = () => {
-
+    const movePlayer = dir => {
+        updatePlayerPos({ x: dir, y: 0, collided: false })
     }
 
     const drop = () => {
-
+        updatePlayerPos({ x: 0, y: 1, collided: false })
     }
 
     const dropPlayer = () => {
@@ -58,7 +61,7 @@ export const GamePage = () => {
                             <DisplayField text='Score :' />
                             <DisplayField text='Rows :' />
                             <DisplayField text='Level :' />
-                            <ActionButton />
+                            <ActionButton onClick={startGame} />
                         </div>
                     )
                 }
