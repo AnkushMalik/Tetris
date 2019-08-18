@@ -9,7 +9,6 @@ export const StyledButton = styled.button`
     background: black;
     color: rgb(153, 153, 153);
     border : 2px solid rgb(153, 153, 153);
-    border-radius: 2rem;
     &:hover{
         background: white;
         color: grey;
