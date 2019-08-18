@@ -12,7 +12,7 @@ export const TETROMINOS = {
     O: { shape: [['O', 'O'], ['O', 'O']], color: '223, 217, 36' },
     S: { shape: [[0, 'S', 'S'], ['S', 'S', 0], [0, 0, 0]], color: '48, 211, 56' }, //why zero array? for fitting in random tetramino shape!
     T: {
-        shape: [[0, 0, 0], ['T', 'T', 'T'], [0, 'T', 0]],
+        shape: [['T', 'T', 'T'], [0, 'T', 0], [0, 0, 0]],
         color: '132, 61, 198',
     },
     Z: { shape: [['Z', 'Z', 0], [0, 'Z', 'Z'], [0, 0, 0]], color: '227, 78, 78' },
