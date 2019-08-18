@@ -1,9 +1,9 @@
 import React from 'react'
 
-import './display-field.styles.scss'
+import { StyledDisplay } from './display-style.component'
 
-export const DisplayField = () => (
-    <div className="display-field">
-
-    </div>
+export const DisplayField = ({ gameOver, text }) => (
+    <StyledDisplay gameOver={gameOver}>
+        {text}
+    </StyledDisplay>
 )

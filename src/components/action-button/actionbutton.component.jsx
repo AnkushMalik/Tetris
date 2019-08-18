@@ -1,7 +1,8 @@
 import React from 'react'
 
+import { StyledButton } from './styledaction.component'
 export const ActionButton = () => (
-    <div className="action-button">
-
-    </div>
+    <StyledButton>
+        Start
+    </StyledButton>
 )

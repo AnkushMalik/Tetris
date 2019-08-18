@@ -1,6 +1,10 @@
 .game-page{
     display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    .infonav{
+        width: 250px;
+        margin: 50px 35px;
+    }
+    // justify-content: center;
+    // align-items: center;
+    // height: 100vh;
 }
