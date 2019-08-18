@@ -16,9 +16,39 @@ export const GamePage = () => {
     const [player] = usePlayer();
     const [pg, setPg] = usePlayground();
 
+    const startGame = () => {
+
+    }
+
+    const movePlayer = () => {
+
+    }
+
+    const drop = () => {
+
+    }
+
+    const dropPlayer = () => {
+        drop();
+    }
+
+    const move = ({ keyCode }) => {
+        if (!gameOver) {
+            switch (keyCode) {
+                case 37:
+                    movePlayer(-1)
+                    break;
+                case 39:
+                    movePlayer(1)
+                case 40:
+                    dropPlayer();
+            }
+        }
+    }
+
 
     return (
-        <div className="game-page">
+        <div className="game-page" onKeyDown={e => move(e)}>
             <Playground pg={pg} />
             <div className='infonav'>
                 {gameOver ? (
