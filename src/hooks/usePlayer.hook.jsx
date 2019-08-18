@@ -1,11 +1,11 @@
 import { useState, useCallback } from 'react'
-import { randomTtr } from '../helpers/tetrominos'
+import { TETROMINOS, randomTtr } from '../helpers/tetrominos'
 import { pgwidth } from '../helpers/playgroundHelper';
 
 export const usePlayer = () => {
     const [player, setPlayer] = useState({
         pos: { x: 0, y: 0 },
-        tetromino: randomTtr.shape,
+        tetromino: TETROMINOS[0].shape,
         collided: false
     });
 
@@ -19,8 +19,8 @@ export const usePlayer = () => {
     const resetPlayer = useCallback(
         () => {
             setPlayer({
-                pos: { x: pgwidth / 2, y: 0 },
-                tetromino: randomTtr.shape,
+                pos: { x: pgwidth / 2 - 1, y: 0 },
+                tetromino: randomTtr().shape,
                 collided: false
             })
         }, [])
