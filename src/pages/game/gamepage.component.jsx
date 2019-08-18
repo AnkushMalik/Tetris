@@ -5,9 +5,9 @@ import { DisplayField } from '../../components/display-field/display-field.compo
 import { ActionButton } from '../../components/action-button/actionbutton.component'
 import { usePlayground } from '../../hooks/usePlayground.hook'
 import { usePlayer } from '../../hooks/usePlayer.hook'
+import { createpg, checkCollision } from '../../helpers/playgroundHelper';
 
 import './gamepage.styles.scss'
-import { createpg } from '../../helpers/playgroundHelper';
 
 export const GamePage = () => {
 
@@ -20,14 +20,25 @@ export const GamePage = () => {
         //Reset everything
         setPg(createpg());
         resetPlayer();
+        setGameOver(false);
     }
 
     const movePlayer = dir => {
-        updatePlayerPos({ x: dir, y: 0 })
+        if (!checkCollision(player, pg, { x: dir, y: 0 }))
+            updatePlayerPos({ x: dir, y: 0 })
     }
 
     const drop = () => {
-        updatePlayerPos({ x: 0, y: 1, collided: false })
+        if (!checkCollision(player, pg, { x: 0, y: 1 })) {
+            updatePlayerPos({ x: 0, y: 1, collided: false })
+        } else {
+            if (player.pos < 1) {
+                setGameOver(true);
+                setDropTime(null);
+                console.log('Game Over!');
+            }
+            updatePlayerPos({ x: 0, y: 0, collided: true })
+        }
     }
 
     const dropPlayer = () => {
@@ -49,7 +60,6 @@ export const GamePage = () => {
             }
         }
     }
-    console.log(player.tetromino)
 
     return (
         <div className="game-page" role='button' tabIndex='0' onKeyDown={e => move(e)}>
