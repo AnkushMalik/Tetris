@@ -4,8 +4,23 @@ import { createpg } from '../helpers/playgroundHelper'
 
 export const usePlayground = (player, resetPlayer) => {
     const [pg, setPg] = useState(createpg());
+    const [rowsCleared, setRowsCleared] = useState(0);
 
     useEffect(() => {
+        setRowsCleared(0);
+
+        const sweepRows = newpg =>
+            newpg.reduce((ack, row) => {
+                if (row.findIndex(cell => cell[0] === 0) === -1) {
+                    setRowsCleared(prev => prev + 1);
+                    ack.unshift(new Array(newpg[0].length).fill([0, 'clear']));
+                    return ack;
+                }
+                ack.push(row);
+                return ack;
+            }, []);
+
+
         const updatepg = prevPG => {
             //clean the playground
             const newpg = prevPG.map(
@@ -27,6 +42,7 @@ export const usePlayground = (player, resetPlayer) => {
             // check collision
             if (player.collided) {
                 resetPlayer();
+                return sweepRows(newpg);
             }
 
 
@@ -35,5 +51,5 @@ export const usePlayground = (player, resetPlayer) => {
         setPg(prev => updatepg(prev))
     }, [player, resetPlayer])
 
-    return [pg, setPg];
+    return [pg, setPg, rowsCleared];
 }

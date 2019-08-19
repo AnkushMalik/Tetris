@@ -4,6 +4,7 @@ import { Playground } from '../../components/playground/playground.component'
 import { DisplayField } from '../../components/display-field/display-field.component'
 import { ActionButton } from '../../components/action-button/actionbutton.component'
 import { usePlayground } from '../../hooks/usePlayground.hook'
+import { useInterval } from '../../hooks/useInterval.hook'
 import { usePlayer } from '../../hooks/usePlayer.hook'
 import { createpg, checkCollision } from '../../helpers/playgroundHelper';
 
@@ -19,6 +20,7 @@ export const GamePage = () => {
     const startGame = () => {
         //Reset everything
         setPg(createpg());
+        setDropTime(1000);
         resetPlayer();
         setGameOver(false);
     }
@@ -32,7 +34,7 @@ export const GamePage = () => {
         if (!checkCollision(player, pg, { x: 0, y: 1 })) {
             updatePlayerPos({ x: 0, y: 1, collided: false })
         } else {
-            if (player.pos < 1) {
+            if (player.pos.y < 1) {
                 setGameOver(true);
                 setDropTime(null);
                 console.log('Game Over!');
@@ -40,10 +42,25 @@ export const GamePage = () => {
             updatePlayerPos({ x: 0, y: 0, collided: true })
         }
     }
+    console.log(player.pos)
+
+    const keyUp = ({ keyCode }) => {
+        if (!gameOver) {
+            // Activate the interval again when user releases down arrow.
+            if (keyCode === 40) {
+                setDropTime(1000);
+            }
+        }
+    }
 
     const dropPlayer = () => {
+        setDropTime(null);
         drop();
     }
+
+    useInterval(() => {
+        drop();
+    }, dropTime);
 
     const move = ({ keyCode }) => {
         if (!gameOver) {
@@ -64,7 +81,7 @@ export const GamePage = () => {
     }
 
     return (
-        <div className="game-page" role='button' tabIndex='0' onKeyDown={e => move(e)}>
+        <div className="game-page" role='button' tabIndex='0' onKeyUp={keyUp} onKeyDown={e => move(e)}>
             <Playground pg={pg} />
             <div className='infonav'>
                 {gameOver ? (
