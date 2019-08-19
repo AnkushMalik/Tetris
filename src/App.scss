@@ -1,0 +1,21 @@
+*{
+  box-sizing: border-box;
+}
+
+.App{
+  background-color: #282c34;
+  min-height: 100vh;
+  font-family: 'Press Start 2P', cursive;
+  color: rgb(212, 212, 212);
+  background: url('https://image.freepik.com/free-vector/test-screen-glitch-texture_88188-318.jpg');
+  background-color: rgba(0, 0, 0, 0);
+  background-repeat: repeat;
+  background-size: auto;
+
+  h1{
+    margin: 0;
+    padding: 10px;
+    text-align: center;
+    font-size: 50px;
+  }
+}

@@ -99,7 +99,7 @@ export const GamePage = () => {
             <Playground pg={pg} />
             <div className='infonav'>
                 {gameOver ? (
-                    <DisplayField className='game-over' text='Game Over' />
+                    <DisplayField gameOver={gameOver} text='Game Over' />
                 ) : null
                 }
                 <DisplayField text={`Score : ${score}`} />

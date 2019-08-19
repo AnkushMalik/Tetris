@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Cell } from '../cell/cell.component'
+import Cell from '../cell/cell.component'
 import { PgDiv } from './pg-style.component'
 
 export const Playground = ({ pg }) => (
