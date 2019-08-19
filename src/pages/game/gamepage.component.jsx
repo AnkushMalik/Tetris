@@ -13,7 +13,7 @@ export const GamePage = () => {
 
     const [dropTime, setDropTime] = useState(null);
     const [gameOver, setGameOver] = useState(false);
-    const [player, updatePlayerPos, resetPlayer] = usePlayer();
+    const [player, updatePlayerPos, resetPlayer, playerRotate] = usePlayer();
     const [pg, setPg] = usePlayground(player, resetPlayer);
 
     const startGame = () => {
@@ -57,6 +57,8 @@ export const GamePage = () => {
                 case 40:
                     dropPlayer();
                     break;
+                case 38:
+                    playerRotate(pg, 1)
             }
         }
     }
